@@ -8,7 +8,7 @@
 
 2、超文本传输协议”，它可以拆成三个部分，分别是：“超文本”“传输”和“协议”。我们可以逐个解析，理解了这三个词，我们也就明白了什么是 HTTP。
 
-![image-20240111234658246](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112347320.png)
+![image-20240117213347162](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172133419.png)
 
 1. 首先，HTTP 是一个协议。不过，协议又是什么呢？其实“协议”并不仅限于计算机世界，现实生活中也随处可见。例如，你在刚毕业时会签一个“三方协议”，找房子时会签一个“租房协议”，公司入职时还可能会签一个“保密协议”，工作中使用的各种软件也都带着各自的“许可协议”。
 
@@ -39,7 +39,7 @@ OK，经过了对 HTTP 里这三个名词的详细解释，下次当你再面对
 
 服务端收到请求后返回一个以 ASCII 字符流编码的 HTML 文档。
 
-![image-20240111234738590](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112347631.png)
+![image-20240117213406288](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172134780.png)
 
 HTTP/0.9 虽然简单，但是它充分验证了 Web 服务的可行性：
 
@@ -59,7 +59,7 @@ HTTP/0.9 虽然简单，但是它充分验证了 Web 服务的可行性：
 
 头部字段不仅用于解决不同类型文件传输的问题，也可以实现其他很多功能如缓存、认证信息等。
 
-![image-20240111234855248](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112348272.png)
+![image-20240117213428232](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172134551.png)
 
 3. **HTTP/1.1**
 
@@ -78,7 +78,7 @@ HTTP/0.9 虽然简单，但是它充分验证了 Web 服务的可行性：
 - 允许响应数据分块（chunked），利于传输大文件。
 - 强制要求 Host 头，让互联网主机托管成为可能。
 
-![image-20240111235256551](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112352591.png)
+![image-20240117213445516](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172134873.png)
 
 HTTP/1.1 与 HTTP/1.0 的一个重要区别是：
 
@@ -109,7 +109,7 @@ HTTP/2.0 的主要改动包括：
 - 头部字段全部改为小写；引入了伪头部的概念，出现在头部字段之前，以冒号开头。
 - 增强了安全性，“事实上”要求加密通信。
 
-![image-20240111235848724](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112358755.png)
+![image-20240117213503842](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172135007.png)
 
 HTTP/2.0 虽然已经发布了 6 年，不过由于 HTTP/1.1 实在太过经典和强势，目前 HTTP/2.0 的普及率还比较低，仍然有很多网站使用的是 HTTP/1.1 版本。
 
@@ -180,7 +180,7 @@ HTTP 2.0的新特性
 
 下图中的 RTT 为往返时延（Round-Trip Time： 往返时延。表示从发送端发送数据开始，到发送端收到来自接收端的确认，总共经历的时延）。
 
-![image-20240111235920545](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112359580.png)
+![image-20240117213529241](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172135392.png)
 
 #### 1.4.2、断开连接
 
@@ -215,7 +215,7 @@ HTTP 报文由请求行、首部、实体主体组成，它们之间由“回车
 
 **注意：实体包括首部(也称为实体首部)和实体主体，sp 即是空格 space**。
 
-![image-20240111235937917](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401112359950.png)
+![image-20240117213550010](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172135115.png)
 
 请求行和首部是由 ASCII 文本组成的，实体主体是可选的，可以为空也可以是任意二进制数据。请求报文和响应报文的格式基本相同。
 
@@ -291,7 +291,7 @@ Transfer-Encoding: chunked
 1. 解析url，获取url中包含的域名。
 2. 通过DNS系统查询域名对应的IP。
 
-![image-20240112000002420](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401120000465.png)
+![image-20240117213610838](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172136035.png)
 
 **通过DNS系统查询域名对应的IP的具体步骤：**
 
@@ -354,9 +354,9 @@ Transfer-Encoding: chunked
 
 流程图如下：
 
-![image-20240112000023284](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401120000333.png)
+![image-20240117213636184](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172136524.png)
 
-![image-20240112000039993](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401120000043.png)
+![image-20240117213658237](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172137054.png)
 
 虽然HTTPS并非绝对的安全，掌握根证书的机构，掌握加密算法的组织同样可以进行中间人形式的攻击，但是HTTPS仍是现行架构下最安全的解决方案，它大幅增加了中间人攻击的成本。相对而言还是比较安全的。
 
@@ -386,7 +386,7 @@ Transfer-Encoding: chunked
 
 **CA签发证书及客户端校验服务端的数字证书的过程：**
 
-![image-20240112000148393](https://raw.githubusercontent.com/aqinzz/Pictures/main/202401120001439.png)
+![image-20240117213720433](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172137760.png)
 
 1. **CA签发证书过程**
 
