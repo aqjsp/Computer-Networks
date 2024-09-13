@@ -211,7 +211,7 @@ TCP采用基于窗口的方法进行拥塞控制，该方法属于闭环控制�
 
 算法思路：由小到大逐渐增大拥塞窗口，当自己主机刚连进网络时如果一下注入太多资源可能造成网络拥塞，因此循序渐进的探测网络的拥塞程度。每收到一个确认报文拥塞窗口就增加一个报文段。
 
-![image-20240117214132263](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172141897.png)
+![慢启动](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172141897.png)
 
 发送方每接收到一个确认报文就将拥塞窗口增加一个报文段。如图所示我们可以看出发送一个收到一个确认下次发两个，收到两个确认下次发2+2=4个收到4个确认下次发4+4等于8个由此可见慢开始算法并不慢。
 
@@ -302,7 +302,7 @@ TCP采用基于窗口的方法进行拥塞控制，该方法属于闭环控制�
 
 ### 7.2、TCP连接释放
 
-![image-20240117214423603](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172144645.png)
+![四次挥手](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172144645.png)
 
 1. 第一次挥手（FIN-1）：
    - 客户端发送一个 FIN 报文段给服务器，表示客户端已经没有数据要发送了，请求关闭连接。
