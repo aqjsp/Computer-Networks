@@ -111,11 +111,22 @@ HTTP/2.0 的主要改动包括：
 
 ![image-20240117213503842](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172135007.png)
 
-HTTP/2.0 虽然已经发布了 6 年，不过由于 HTTP/1.1 实在太过经典和强势，目前 HTTP/2.0 的普及率还比较低，仍然有很多网站使用的是 HTTP/1.1 版本。
+HTTP/2 在 2015 年成 RFC。现在浏览器、CDN、主流网关都支持，但内网、老负载均衡、只开了 443/TCP 的源站仍大量停留在 HTTP/1.1。不是「已经没人用 1.1」，也不是「2 还没普及」——看你的部署环境。HTTP/2 解决不了 TCP 层队头阻塞，这才有 HTTP/3。
 
 5. **HTTP/3**
 
-看到这里，你可能会问了：“HTTP/2 这么好，是不是就已经完美了呢？”答案是否定的，这一次还是 Google，而且它要“革自己的命”。在 HTTP/2 还处于草案之时，Google 又发明了一个新的协议，叫做 QUIC，而且还是相同的“套路”，继续在 Chrome 和自家服务器里试验着“玩”，依托它的庞大用户量和数据量，持续地推动 QUIC 协议成为互联网上的“既成事实”。“功夫不负有心人”，当然也是因为 QUIC 确实自身素质过硬。在去年，也就是 2018 年，互联网标准化组织 IETF 提议将“HTTP over QUIC”更名为“HTTP/3”并获得批准，HTTP/3 正式进入了标准化制订阶段，也许两三年后就会正式发布，到时候我们很可能会跳过 HTTP/2 直接进入 HTTP/3。
+HTTP/2 解决的是应用层队头阻塞：一条 TCP 上多个 stream 的帧可以交错。它解决不了传输层队头阻塞——TCP 丢一个包，后面已经到达的包也得等重传。Google 在 HTTP/2 还是草案时就开始用 QUIC（基于 UDP）做实验。2018 年 IETF 把 “HTTP over QUIC” 更名为 HTTP/3。2022 年 RFC 9114 把 HTTP/3 定成标准，RFC 9000 定的是 QUIC 本身。
+
+HTTP/3 的关键点：
+
+- 传输从 TCP 换成 QUIC（跑在 UDP 上）。流与流之间互不阻塞，丢包只影响那个 stream。
+- TLS 1.3 嵌进 QUIC 握手，通常 1-RTT 建连，会话恢复可以 0-RTT。
+- 连接用连接 ID 标识，不绑死四元组，换 Wi-Fi / 切 4G 可以连接迁移，不用重握手。
+- 仍然是二进制帧、多路复用、QPACK 压头部（不能直接复用 HTTP/2 的 HPACK，因为 HPACK 依赖有序交付）。
+
+HTTP/2 并没有被淘汰。很多内网、老网关、只开 443/TCP 的环境还在用 HTTP/2 甚至 HTTP/1.1。面试说到「现在都 HTTP/3 了」要补一句：浏览器和 CDN 已经广泛支持，但源站和中间设备不是一刀切。
+
+![HTTP/1.1 队头阻塞、HTTP/2 多路复用、HTTP/3 QUIC](./image/http-multiplex.svg)
 
 6. **HTTP 1.0和HTTP 1.1的区别**
 
@@ -352,7 +363,11 @@ Transfer-Encoding: chunked
 6. 服务端收到后利用私钥解密信息，获得客户端发来的对称密钥。
 7. 通信双方可用对称密钥来加密解密信息。
 
-流程图如下：
+上面这套「非对称换对称密钥」的思路是对的，细节要按 TLS 版本分开讲。TLS 1.2 是多次往返：ServerHello、证书、ServerKeyExchange、ChangeCipherSpec、Finished 拆开走。TLS 1.3（RFC 8446）把密钥份额提前放到 ClientHello，服务器一轮就能带证书和 Finished 回来，握手压到 1-RTT。证书不是握手时现找 CA 签的，是服务器事先申请好、握手时直接出示的。
+
+![TLS 1.3 握手：证书事先存在，1-RTT 换出对称密钥](./image/https-tls13.svg)
+
+流程图如下（早期教材按 SSL/TLS 1.2 画的，和 TLS 1.3 的报文数量对不上，原理仍是「非对称只用来换会话密钥」）：
 
 ![image-20240117213636184](https://raw.githubusercontent.com/aqjsp/Pictures/main/202401172136524.png)
 
@@ -403,7 +418,7 @@ Transfer-Encoding: chunked
 ### 2.4、SSL与TLS
 
 1. SSL：（Secure Socket Layer，安全套接字层），位于可靠的面向连接的网络层协议和应用层协议之间的一种协议层。SSL通过互相认证、使用数字签名确保完整性、使用加密确保私密性，以实现客户端和服务器之间的安全通讯。该协议由两层组成：SSL记录协议和SSL握手协议。
-2. TLS：(Transport Layer Security，传输层安全协议)，用于两个应用程序之间提供保密性和数据完整性。该协议由两层组成：TLS记录协议和TLS握手协议。TLS是HTTP与TCP协议之间的一层，通常TLS发生在TCP三次握手之后，此时进行TLS四次握手，然后再进行HTTP通信。
+2. TLS：(Transport Layer Security，传输层安全协议)，用于两个应用程序之间提供保密性和数据完整性。该协议由两层组成：TLS记录协议和TLS握手协议。TLS 是 HTTP 与传输层之间的一层。跑在 TCP 上时，先三次握手，再 TLS 握手，再发 HTTP。TLS 1.2 常见是 2-RTT；TLS 1.3 是 1-RTT，会话恢复可以 0-RTT。HTTP/3 里 TLS 1.3 嵌在 QUIC 里，没有「先 TCP 再 TLS」这一层。现在浏览器已经不再启用 SSL 3.0 / TLS 1.0 / 1.1。
 
 ### 2.5、HTTPS涉及的计算环节
 

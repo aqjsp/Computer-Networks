@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="880" height="300" rx="12" fill="#fafafa"/>
+  <rect width="880" height="300" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="440" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">TCP 滑动窗口（流量控制）</text>
+
+  <text x="40" y="70" font-size="13" fill="#37474f">发送缓存（字节流）</text>
+  <rect x="40" y="84" width="800" height="56" rx="6" fill="#fff" stroke="#90a4ae"/>
+  <rect x="40" y="84" width="160" height="56" fill="#cfd8dc"/>
+  <rect x="200" y="84" width="220" height="56" fill="#bbdefb"/>
+  <rect x="420" y="84" width="260" height="56" fill="#c8e6c9"/>
+  <rect x="680" y="84" width="160" height="56" fill="#fff"/>
+  <text x="120" y="118" text-anchor="middle" font-size="12" fill="#37474f">已确认</text>
+  <text x="310" y="118" text-anchor="middle" font-size="12" fill="#0d47a1">已发送未确认</text>
+  <text x="550" y="118" text-anchor="middle" font-size="12" fill="#1b5e20">可发送（窗口内）</text>
+  <text x="760" y="118" text-anchor="middle" font-size="12" fill="#546e7a">不可发送</text>
+  <polygon points="200,150 200,168 420,168 420,150" fill="none" stroke="#1565c0" stroke-width="2"/>
+  <text x="310" y="186" text-anchor="middle" font-size="12" fill="#1565c0">发送窗口 = min(rwnd, cwnd)</text>
+  <text x="40" y="220" font-size="13" fill="#37474f">rwnd：对端接收缓存剩余　　cwnd：本端对网络拥塞的估计</text>
+  <text x="40" y="248" font-size="13" fill="#37474f">rwnd=0 时发零窗口探测（持续计时器），避免窗口更新 ACK 丢失造成死锁</text>
+  <text x="40" y="276" font-size="13" fill="#37474f">糊涂窗口：接收方不通告过小窗口；发送方 Nagle 攒小包。长肥管道用 Window Scale</text>
+
+</svg>

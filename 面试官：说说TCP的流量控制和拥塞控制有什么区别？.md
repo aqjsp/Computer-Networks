@@ -34,6 +34,8 @@ TCP通过滑动窗口 机制实现流量控制。每个TCP连接的发送方和�
 
 发送方的有效发送窗口大小为 `min(rwnd, cwnd)`。当`rwnd`为0时，发送方会停止发送数据，直到接收方通告一个非零的窗口值。
 
+![TCP 滑动窗口：已确认、已发送未确认、窗口内可发](./image/tcp-sliding-window.svg)
+
 ![TCP流量控制滑动窗口示意图](https://cdn.jsdelivr.net/gh/aqjsp/photos/CClgRvyDTiqYBrPg.png)
 
 ##### 1.2、流量控制中的挑战与解决方案
@@ -92,6 +94,8 @@ TCP的拥塞控制主要包含四种经典算法：慢开始（Slow Start）、�
 
 这些算法协同工作，共同构成了TCP拥塞控制的基石。
 
+![慢启动指数增长，拥塞避免线性，超时才真正回到慢启动](./image/tcp-congestion.svg)
+
 ![TCP拥塞控制算法流程图](https://cdn.jsdelivr.net/gh/aqjsp/photos/yshNmsvVvNujhMto.png)
 
 ###### 2.2.1、慢开始（Slow Start）
@@ -100,7 +104,7 @@ TCP的拥塞控制主要包含四种经典算法：慢开始（Slow Start）、�
 
 其核心思想是：**先探测，后加速**。
 
-当TCP连接建立时，`cwnd`会被初始化为一个较小的值，通常是1个MSS（Maximum Segment Size，最大报文段大小）。
+当TCP连接建立时，`cwnd`会被初始化为一个较小的值。教材（Reno / 谢希仁）常写成 1 个 MSS，便于画指数翻倍。Linux 从 3.2 起默认初始窗口是 10 个 MSS（RFC 6928，IW10），所以抓包看到连接一上来就发十来个段是正常的，不是没走慢启动。
 
 发送方每收到一个ACK，`cwnd`就增加1个MSS。
 

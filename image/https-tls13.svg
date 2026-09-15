@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="880" height="360" rx="12" fill="#fafafa"/>
+  <rect width="880" height="360" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="440" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">HTTPS = HTTP over TLS 1.3（证书事先由 CA 签发）</text>
+
+  <text x="140" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">浏览器</text>
+  <text x="720" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">服务器</text>
+  <line x1="140" y1="84" x2="140" y2="300" stroke="#90caf9" stroke-width="2"/>
+  <line x1="720" y1="84" x2="720" y2="300" stroke="#ffcc80" stroke-width="2"/>
+  <line x1="140" y1="110" x2="720" y2="130" stroke="#1565c0" stroke-width="2"/>
+  <polygon points="720,130 706,124 706,136" fill="#1565c0"/>
+  <text x="430" y="114" text-anchor="middle" font-size="12" fill="#1565c0">ClientHello（密码套件、密钥份额、SNI）</text>
+  <line x1="720" y1="160" x2="140" y2="190" stroke="#e65100" stroke-width="2"/>
+  <polygon points="140,190 154,184 154,196" fill="#e65100"/>
+  <text x="430" y="168" text-anchor="middle" font-size="12" fill="#e65100">ServerHello + 证书 + CertificateVerify + Finished</text>
+  <line x1="140" y1="220" x2="720" y2="240" stroke="#2e7d32" stroke-width="2"/>
+  <polygon points="720,240 706,234 706,246" fill="#2e7d32"/>
+  <text x="430" y="224" text-anchor="middle" font-size="12" fill="#2e7d32">Finished（握手完成，开始应用数据）</text>
+  <rect x="200" y="268" width="480" height="36" rx="6" fill="#c8e6c9" stroke="#2e7d32"/>
+  <text x="440" y="292" text-anchor="middle" font-size="13" fill="#1b5e20">之后用对称密钥（AES-GCM 等）加密 HTTP</text>
+  <text x="440" y="340" text-anchor="middle" font-size="11" fill="#78909c">TLS 1.3 把 1.2 的 2-RTT 压到 1-RTT；会话恢复可以 0-RTT。证书链在握手前就已存在，不是握手时去 CA 现签</text>
+
+</svg>

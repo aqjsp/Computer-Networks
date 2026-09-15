@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="860" height="420" rx="12" fill="#fafafa"/>
+  <rect width="860" height="420" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="430" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">TCP 四次挥手</text>
+
+  <text x="140" y="70" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">主动关闭方</text>
+  <text x="720" y="70" text-anchor="middle" font-size="14" font-weight="bold" fill="#e65100">被动关闭方</text>
+  <line x1="140" y1="88" x2="140" y2="390" stroke="#90caf9" stroke-width="2"/>
+  <line x1="720" y1="88" x2="720" y2="390" stroke="#ffcc80" stroke-width="2"/>
+  <line x1="140" y1="120" x2="720" y2="150" stroke="#1565c0" stroke-width="2"/>
+  <polygon points="720,150 706,144 706,156" fill="#1565c0"/>
+  <text x="430" y="128" text-anchor="middle" font-size="12" fill="#1565c0">① FIN seq=u</text>
+  <text x="140" y="114" text-anchor="end" font-size="11" fill="#546e7a">FIN_WAIT_1　</text>
+  <line x1="720" y1="180" x2="140" y2="210" stroke="#e65100" stroke-width="2"/>
+  <polygon points="140,210 154,204 154,216" fill="#e65100"/>
+  <text x="430" y="188" text-anchor="middle" font-size="12" fill="#e65100">② ACK ack=u+1</text>
+  <text x="720" y="174" text-anchor="start" font-size="11" fill="#546e7a"> CLOSE_WAIT（应用还可发数据）</text>
+  <text x="140" y="228" text-anchor="end" font-size="11" fill="#546e7a">FIN_WAIT_2　</text>
+  <line x1="720" y1="250" x2="140" y2="280" stroke="#e65100" stroke-width="2"/>
+  <polygon points="140,280 154,274 154,286" fill="#e65100"/>
+  <text x="430" y="258" text-anchor="middle" font-size="12" fill="#e65100">③ FIN seq=w</text>
+  <text x="720" y="268" text-anchor="start" font-size="11" fill="#546e7a"> LAST_ACK</text>
+  <line x1="140" y1="310" x2="720" y2="340" stroke="#2e7d32" stroke-width="2"/>
+  <polygon points="720,340 706,334 706,346" fill="#2e7d32"/>
+  <text x="430" y="318" text-anchor="middle" font-size="12" fill="#2e7d32">④ ACK ack=w+1</text>
+  <text x="140" y="348" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">TIME_WAIT 2MSL</text>
+  <text x="720" y="368" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">CLOSED</text>
+  <text x="430" y="408" text-anchor="middle" font-size="11" fill="#78909c">TCP 全双工：两边各关一半。2MSL 保证最后 ACK 能重传，并让旧报文在网上消失</text>
+
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="880" height="360" rx="12" fill="#fafafa"/>
+  <rect width="880" height="360" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="440" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">TCP 拥塞控制：慢启动 → 拥塞避免 → 快恢复</text>
+
+  <polyline points="60,300 60,50 840,50" fill="none" stroke="#bdbdbd" stroke-width="1.5"/>
+  <text x="70" y="48" font-size="12" fill="#546e7a">cwnd</text>
+  <text x="820" y="320" font-size="12" fill="#546e7a">时间 / RTT</text>
+  <polyline points="80,280 140,240 200,180 260,100 320,80 380,70 440,60 500,200 560,190 620,180 680,170 740,280 800,260" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+  <line x1="80" y1="100" x2="440" y2="100" stroke="#e65100" stroke-dasharray="6 4"/>
+  <text x="450" y="104" font-size="12" fill="#e65100">ssthresh</text>
+  <text x="180" y="210" font-size="12" fill="#1565c0">慢启动 指数</text>
+  <text x="340" y="55" font-size="12" fill="#2e7d32">拥塞避免 线性</text>
+  <text x="500" y="230" font-size="12" fill="#c62828">3 个重复 ACK → 快重传</text>
+  <text x="620" y="155" font-size="12" fill="#6a1b9a">快恢复 cwnd≈ssthresh</text>
+  <text x="740" y="300" font-size="12" fill="#c62828">超时：cwnd 回到初始窗口</text>
+  <text x="440" y="344" text-anchor="middle" font-size="11" fill="#78909c">Linux 默认初始 cwnd=10 MSS（RFC 6928）；教材常画成 1 MSS。超时才真正「从慢启动再来」</text>
+
+</svg>

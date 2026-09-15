@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="880" height="340" rx="12" fill="#fafafa"/>
+  <rect width="880" height="340" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="440" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">HTTP/1.1 队头阻塞 vs HTTP/2 多路复用 vs HTTP/3 QUIC</text>
+
+  <rect x="30" y="58" width="260" height="250" rx="10" fill="#ffebee" stroke="#c62828" stroke-width="2"/>
+  <text x="160" y="86" text-anchor="middle" font-size="13" font-weight="bold" fill="#c62828">HTTP/1.1 一条 TCP</text>
+  <rect x="50" y="104" width="220" height="28" rx="4" fill="#ef9a9a"/><text x="160" y="123" text-anchor="middle" font-size="12">请求 A ────► 响应 A</text>
+  <rect x="50" y="142" width="220" height="28" rx="4" fill="#ffcdd2"/><text x="160" y="161" text-anchor="middle" font-size="12">请求 B 等待……</text>
+  <rect x="50" y="180" width="220" height="28" rx="4" fill="#ffcdd2"/><text x="160" y="199" text-anchor="middle" font-size="12">请求 C 等待……</text>
+  <text x="160" y="250" text-anchor="middle" font-size="11" fill="#b71c1c">队头阻塞：前一个没完</text>
+  <text x="160" y="270" text-anchor="middle" font-size="11" fill="#b71c1c">后面全堵。浏览器开 6 连接缓解</text>
+
+  <rect x="310" y="58" width="260" height="250" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="440" y="86" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">HTTP/2 一条 TCP</text>
+  <rect x="330" y="104" width="220" height="22" rx="4" fill="#a5d6a7"/><text x="440" y="120" text-anchor="middle" font-size="11">stream 1 帧  stream 2 帧</text>
+  <rect x="330" y="132" width="220" height="22" rx="4" fill="#81c784"/><text x="440" y="148" text-anchor="middle" font-size="11">stream 3 帧  stream 1 帧</text>
+  <rect x="330" y="160" width="220" height="22" rx="4" fill="#66bb6a"/><text x="440" y="176" text-anchor="middle" font-size="11">二进制分帧交错发送</text>
+  <text x="440" y="220" text-anchor="middle" font-size="11" fill="#1b5e20">应用层不再排队</text>
+  <text x="440" y="240" text-anchor="middle" font-size="11" fill="#1b5e20">但 TCP 丢包仍会堵整条连接</text>
+  <text x="440" y="270" text-anchor="middle" font-size="11" fill="#1b5e20">HPACK 压缩头部</text>
+
+  <rect x="590" y="58" width="260" height="250" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="720" y="86" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">HTTP/3 over QUIC</text>
+  <rect x="610" y="104" width="220" height="22" rx="4" fill="#90caf9"/><text x="720" y="120" text-anchor="middle" font-size="11">UDP + QUIC 流</text>
+  <rect x="610" y="132" width="220" height="22" rx="4" fill="#64b5f6"/><text x="720" y="148" text-anchor="middle" font-size="11">流之间互不阻塞</text>
+  <rect x="610" y="160" width="220" height="22" rx="4" fill="#42a5f5"/><text x="720" y="176" text-anchor="middle" font-size="11">TLS 1.3 内嵌，1-RTT/0-RTT</text>
+  <text x="720" y="220" text-anchor="middle" font-size="11" fill="#0d47a1">RFC 9114（2022）</text>
+  <text x="720" y="240" text-anchor="middle" font-size="11" fill="#0d47a1">连接迁移：换 IP 不断连</text>
+  <text x="720" y="270" text-anchor="middle" font-size="11" fill="#0d47a1">丢包只影响该 stream</text>
+
+</svg>
