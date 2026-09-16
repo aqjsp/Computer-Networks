@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="340" rx="12" fill="#fafafa"/>
+  <rect width="900" height="340" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">DNS：本机问递归，递归再去迭代</text>
+
+  <rect x="24" y="50" width="150" height="56" rx="8" fill="#e3f2fd" stroke="#1565c0"/>
+  <text x="99" y="74" text-anchor="middle" font-size="13" fill="#0d47a1">浏览器 / 应用</text>
+  <text x="99" y="94" text-anchor="middle" font-size="11" fill="#1565c0">先查自己的缓存</text>
+
+  <rect x="196" y="50" width="150" height="56" rx="8" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="271" y="74" text-anchor="middle" font-size="13" fill="#1b5e20">stub / 本机</text>
+  <text x="271" y="94" text-anchor="middle" font-size="11" fill="#2e7d32">hosts · nscd · systemd</text>
+
+  <rect x="368" y="50" width="164" height="56" rx="8" fill="#fff3e0" stroke="#e65100"/>
+  <text x="450" y="74" text-anchor="middle" font-size="13" fill="#bf360c">递归解析器</text>
+  <text x="450" y="94" text-anchor="middle" font-size="11" fill="#e65100">运营商 / 8.8.8.8 / 1.1.1.1</text>
+
+  <rect x="556" y="50" width="150" height="56" rx="8" fill="#f3e5f5" stroke="#6a1b9a"/>
+  <text x="631" y="74" text-anchor="middle" font-size="13" fill="#4a148c">根 → TLD</text>
+  <text x="631" y="94" text-anchor="middle" font-size="11" fill="#6a1b9a">. / .com 的 NS</text>
+
+  <rect x="728" y="50" width="148" height="56" rx="8" fill="#fce4ec" stroke="#c2185b"/>
+  <text x="802" y="74" text-anchor="middle" font-size="13" fill="#880e4f">权威服务器</text>
+  <text x="802" y="94" text-anchor="middle" font-size="11" fill="#ad1457">这个域的 A 记录</text>
+
+  <path d="M174 78 H196" stroke="#546e7a" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M346 78 H368" stroke="#546e7a" stroke-width="2"/>
+  <path d="M532 78 H556" stroke="#546e7a" stroke-width="2"/>
+  <path d="M706 78 H728" stroke="#546e7a" stroke-width="2"/>
+
+  <text x="450" y="140" text-anchor="middle" font-size="13" fill="#37474f">本机只跟递归说话。递归自己去问根、问 .com、问权威，再把答案缓存起来还给你。</text>
+
+  <rect x="40" y="162" width="820" height="150" rx="8" fill="#fff" stroke="#cfd8dc"/>
+  <text x="60" y="190" font-size="13" fill="#1565c0">1. 浏览器缓存 → OS 缓存 → /etc/hosts。命中就停，根本不出网。</text>
+  <text x="60" y="218" font-size="13" fill="#1565c0">2. 问递归：这是 A 查询。递归若缓存未过期，直接回，TTL 决定能藏多久。</text>
+  <text x="60" y="246" font-size="13" fill="#e65100">3. 缓存没有：问根「.com 找谁」→ 问 .com「aqjszz.com 找谁」→ 问权威「A 是多少」。</text>
+  <text x="60" y="274" font-size="13" fill="#6a1b9a">4. 权威给 A/AAAA；中间若碰到 CNAME，再追那条名字。UDP 53 默认，应答过大或区域传送才改 TCP。</text>
+  <text x="60" y="298" font-size="12" fill="#78909c">CNAME 不能挂在 apex（aqjszz.com 本身）；CDN 用 A/AAAA 或 ALIAS。同一名字多条 A 是负载，不是故障。</text>
+</svg>

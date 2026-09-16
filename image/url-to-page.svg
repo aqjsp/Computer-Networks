@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="280" rx="12" fill="#fafafa"/>
+  <rect width="900" height="280" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">输入 https://aqjszz.com 之后，时间花在哪</text>
+
+  <rect x="30" y="56" width="120" height="70" rx="8" fill="#e3f2fd" stroke="#1565c0"/>
+  <text x="90" y="86" text-anchor="middle" font-size="13" fill="#0d47a1">1 DNS</text>
+  <text x="90" y="108" text-anchor="middle" font-size="11" fill="#1565c0">名字 → IP</text>
+
+  <rect x="170" y="56" width="120" height="70" rx="8" fill="#c8e6c9" stroke="#2e7d32"/>
+  <text x="230" y="86" text-anchor="middle" font-size="13" fill="#1b5e20">2 TCP</text>
+  <text x="230" y="108" text-anchor="middle" font-size="11" fill="#2e7d32">三次握手 1 RTT</text>
+
+  <rect x="310" y="56" width="120" height="70" rx="8" fill="#ffe0b2" stroke="#e65100"/>
+  <text x="370" y="86" text-anchor="middle" font-size="13" fill="#bf360c">3 TLS</text>
+  <text x="370" y="108" text-anchor="middle" font-size="11" fill="#e65100">1.3 再 1 RTT</text>
+
+  <rect x="450" y="56" width="120" height="70" rx="8" fill="#f8bbd0" stroke="#c2185b"/>
+  <text x="510" y="86" text-anchor="middle" font-size="13" fill="#880e4f">4 HTTP</text>
+  <text x="510" y="108" text-anchor="middle" font-size="11" fill="#ad1457">GET / 等响应</text>
+
+  <rect x="590" y="56" width="130" height="70" rx="8" fill="#e1bee7" stroke="#6a1b9a"/>
+  <text x="655" y="86" text-anchor="middle" font-size="13" fill="#4a148c">5 解析</text>
+  <text x="655" y="108" text-anchor="middle" font-size="11" fill="#6a1b9a">HTML → DOM</text>
+
+  <rect x="740" y="56" width="130" height="70" rx="8" fill="#b2ebf2" stroke="#00838f"/>
+  <text x="805" y="86" text-anchor="middle" font-size="13" fill="#006064">6 子资源</text>
+  <text x="805" y="108" text-anchor="middle" font-size="11" fill="#00838f">CSS / JS / 图</text>
+
+  <text x="450" y="160" text-anchor="middle" font-size="13" fill="#37474f">冷启动最贵的是 DNS + 握手 + TLS。HTTP/2 之后同域子资源复用这一条连接，不再各握一次。</text>
+  <text x="450" y="188" text-anchor="middle" font-size="13" fill="#37474f">HSTS / 连接复用 / 会话票证把 2、3 砍掉。CDN 把 4 的 RTT 从「到源站」变成「到边缘」。</text>
+  <text x="450" y="224" text-anchor="middle" font-size="12" fill="#546e7a">面试别只背「DNS → 三次握手 → HTTP」。要说清：缓存命中哪一层、TLS 几个 RTT、连接能不能复用、谁在做 NAT。</text>
+  <text x="450" y="252" text-anchor="middle" font-size="12" fill="#78909c">本站静态页走华为云 OBS：没有应用服务器，4 就是对象存储回 HTML，5、6 在浏览器里完成。</text>
+</svg>

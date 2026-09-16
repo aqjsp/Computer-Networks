@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="300" rx="12" fill="#fafafa"/>
+  <rect width="900" height="300" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">SNAT：家里两台机共用一个公网 IP</text>
+
+  <rect x="30" y="50" width="250" height="220" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="155" y="78" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565c0">局域网 192.168.1.0/24</text>
+  <rect x="50" y="96" width="210" height="48" rx="6" fill="#bbdefb" stroke="#1565c0"/>
+  <text x="155" y="116" text-anchor="middle" font-size="12">笔记本 A 192.168.1.8</text>
+  <text x="155" y="134" text-anchor="middle" font-size="11" fill="#1565c0">:51234 → 8.8.8.8:53</text>
+  <rect x="50" y="156" width="210" height="48" rx="6" fill="#bbdefb" stroke="#1565c0"/>
+  <text x="155" y="176" text-anchor="middle" font-size="12">手机 B 192.168.1.9</text>
+  <text x="155" y="194" text-anchor="middle" font-size="11" fill="#1565c0">:51234 → 8.8.8.8:53</text>
+  <text x="155" y="246" text-anchor="middle" font-size="11" fill="#546e7a">源端口碰巧一样也没关系</text>
+
+  <rect x="320" y="90" width="260" height="140" rx="10" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="450" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#e65100">家用路由 NAT 表</text>
+  <text x="450" y="148" text-anchor="middle" font-size="12">A:51234 ↔ 公网:40001</text>
+  <text x="450" y="172" text-anchor="middle" font-size="12">B:51234 ↔ 公网:40002</text>
+  <text x="450" y="204" text-anchor="middle" font-size="11" fill="#bf360c">改的是源 IP + 源端口</text>
+
+  <rect x="620" y="90" width="250" height="140" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="745" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e7d32">公网</text>
+  <text x="745" y="152" text-anchor="middle" font-size="12">路由 WAN 203.0.113.10</text>
+  <text x="745" y="176" text-anchor="middle" font-size="12">8.8.8.8 只看见这一台</text>
+  <text x="745" y="208" text-anchor="middle" font-size="11" fill="#1b5e20">回来按端口拆回 A 或 B</text>
+</svg>
