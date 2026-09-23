@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="320" rx="12" fill="#fafafa"/>
+  <rect width="900" height="320" rx="12" fill="none" stroke="#e0e0e0"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">WebSocket：一次 HTTP 升级握手，之后双向全双工</text>
+
+  <text x="150" y="66" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">客户端</text>
+  <text x="750" y="66" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">服务器</text>
+  <line x1="150" y1="76" x2="150" y2="280" stroke="#90a4ae" stroke-width="2"/>
+  <line x1="750" y1="76" x2="750" y2="280" stroke="#90a4ae" stroke-width="2"/>
+
+  <rect x="60" y="86" width="780" height="30" rx="6" fill="#e3f2fd" stroke="#1565c0"/>
+  <text x="450" y="106" text-anchor="middle" font-size="12" fill="#0d47a1">GET /chat  Upgrade: websocket  Connection: Upgrade  Sec-WebSocket-Key</text>
+  <line x1="160" y1="130" x2="740" y2="130" stroke="#1565c0" stroke-width="2" marker-end="url(#w)"/>
+  <text x="450" y="126" text-anchor="middle" font-size="11" fill="#546e7a">① 借 HTTP 发升级请求</text>
+
+  <rect x="60" y="140" width="780" height="30" rx="6" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="450" y="160" text-anchor="middle" font-size="12" fill="#1b5e20">HTTP/1.1 101 Switching Protocols  Sec-WebSocket-Accept</text>
+  <line x1="740" y1="184" x2="160" y2="184" stroke="#2e7d32" stroke-width="2" marker-end="url(#w)"/>
+  <text x="450" y="180" text-anchor="middle" font-size="11" fill="#546e7a">② 101 同意，握手完成，此后不再跑 HTTP</text>
+
+  <rect x="60" y="196" width="780" height="60" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="450" y="218" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">③ 同一条 TCP 上跑 WebSocket 帧，双向全双工</text>
+  <line x1="160" y1="238" x2="740" y2="238" stroke="#e65100" stroke-width="2" marker-end="url(#w)"/>
+  <line x1="740" y1="248" x2="160" y2="248" stroke="#e65100" stroke-width="2" marker-end="url(#w)"/>
+  <text x="450" y="236" text-anchor="middle" font-size="11" fill="#bf360c">帧头最小 2 字节 · 客户端帧须掩码 · ping/pong 心跳保活</text>
+
+  <defs><marker id="w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#455a64"/></marker></defs>
+  <text x="450" y="284" text-anchor="middle" font-size="12" fill="#455a64">只需服务器单向推 → SSE｜双向高频 → WebSocket｜极致兼容/低频 → 长轮询</text>
+  <text x="450" y="306" text-anchor="middle" font-size="11" fill="#78909c">不受同源策略约束：服务端握手须校验 Origin，防跨站 WebSocket 劫持；生产用 wss</text>
+</svg>
